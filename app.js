@@ -1,9 +1,9 @@
 (function() {
 	const countdown = {
 		els: {
-			container: document.querySelector('.container__inner'),
-			newYearMain: 'countdown__year countdown__year-main',
-			newYearReflection: 'countdown__year countdown__year-reflection',
+			newYearContainer: document.querySelector('.countdown__year'),
+			newYearMain: 'countdown__year-main',
+			newYearReflection: 'countdown__year-reflection',
 			newYearDigit: 'countdown__year-digit'
 		},
 
@@ -50,7 +50,12 @@
 
 		year(className) {
 			const timeline = new TimelineMax(),
-				newYearEl = countdown.element(this.els.container, 'div', className, ''),
+				newYearEl = countdown.element(
+					this.els.newYearContainer,
+					'div',
+					className,
+					''
+				),
 				newYearVal = countdown.period.year.toString(10);
 
 			newYearVal.split('').forEach(digitVal => {

@@ -15,31 +15,28 @@ body {
 	color: #333333;
 }
 
-.container {
+.countdown {
 	width: 100vw;
 	height: 100vh;
 
-	&__inner {
+	&__year {
 		display: flex;
 		flex-direction: column;
 		width: 100vw;
 		height: 100vh;
 		justify-content: center;
 		align-items: center;
-	}
-}
+		font-size: 6rem;
 
-.countdown__year {
-	font-size: 6rem;
+		&-reflection {
+			transform: rotateX(180deg);
+			opacity: 0.2;
+		}
 
-	&-reflection {
-		transform: rotateX(180deg);
-		opacity: 0.2;
-	}
-
-	&-digit {
-		display: inline-block;
-		position: relative;
-		opacity: 0;
+		&-digit {
+			display: inline-block;
+			position: relative;
+			opacity: 0;
+		}
 	}
 }

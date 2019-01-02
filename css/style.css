@@ -14,20 +14,17 @@ body {
   color: #333333;
 }
 
-.container {
+.countdown {
   width: 100vw;
   height: 100vh;
 }
-.container__inner {
+.countdown__year {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   justify-content: center;
   align-items: center;
-}
-
-.countdown__year {
   font-size: 6rem;
 }
 .countdown__year-reflection {
