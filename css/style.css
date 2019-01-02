@@ -5,22 +5,34 @@
   padding: 0;
 }
 
+html {
+  font-size: 20px;
+}
+
 body {
   font-family: "Major Mono Display", monospace;
   color: #333333;
 }
 
 .container {
-  background-color: #f7f7f7;
   width: 100vw;
   height: 100vh;
 }
 .container__inner {
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   justify-content: center;
   align-items: center;
+}
+
+.countdown__year {
+  font-size: 6rem;
+}
+.countdown__year-digit {
+  display: inline-block;
+  position: relative;
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
