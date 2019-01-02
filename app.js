@@ -3,7 +3,7 @@
 		els: {
 			container: document.querySelector('.container__inner'),
 			newYearMain: 'countdown__year countdown__year-main',
-			newYearReflection: document.querySelector('.countdown__year-reflection'),
+			newYearReflection: 'countdown__year countdown__year-reflection',
 			newYearDigit: 'countdown__year-digit'
 		},
 
@@ -68,6 +68,7 @@
 
 		init() {
 			countdown.year(this.els.newYearMain);
+			countdown.year(this.els.newYearReflection);
 		}
 	};
 	countdown.init();

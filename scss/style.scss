@@ -21,6 +21,7 @@ body {
 
 	&__inner {
 		display: flex;
+		flex-direction: column;
 		width: 100vw;
 		height: 100vh;
 		justify-content: center;
@@ -30,6 +31,11 @@ body {
 
 .countdown__year {
 	font-size: 6rem;
+
+	&-reflection {
+		transform: rotateX(180deg);
+		opacity: 0.2;
+	}
 
 	&-digit {
 		display: inline-block;
