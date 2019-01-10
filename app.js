@@ -57,11 +57,11 @@
 
 		year(className) {
 			const timeline = new TimelineMax(),
-				newYearEl = countdown.element(this.newYear.container, 'div', className),
-				newYearVal = countdown.period.year.toString(10);
+				newYearEl = this.element(this.newYear.container, 'div', className),
+				newYearVal = this.period.year.toString(10);
 
 			newYearVal.split('').forEach(digitVal => {
-				const digitEl = countdown.element(
+				const digitEl = this.element(
 					newYearEl,
 					'span',
 					this.newYear.digit,
@@ -74,9 +74,8 @@
 		},
 
 		init() {
-			console.log(this.els);
-			countdown.year(this.newYear.main);
-			countdown.year(this.newYear.reflection);
+			this.year(this.newYear.main);
+			this.year(this.newYear.reflection);
 		}
 	};
 	countdown.init();
