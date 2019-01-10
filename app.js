@@ -1,10 +1,19 @@
 (function() {
 	const countdown = {
 		els: {
-			newYearContainer: document.querySelector('.countdown__year'),
-			newYearMain: 'countdown__year-main',
-			newYearReflection: 'countdown__year-reflection',
-			newYearDigit: 'countdown__year-digit'
+			newYear: {
+				container: document.querySelector('.countdown__year'),
+				main: 'countdown__year-main',
+				reflection: 'countdown__year-reflection',
+				digit: 'countdown__year-digit'
+			},
+			timer: {
+				container: 'countdown__timer',
+				days: 'countdown__timer-days',
+				hours: 'countdown__timer-hours',
+				minutes: 'countdown__timer-minutes',
+				seconds: 'countdown__timer-seconds'
+			}
 		},
 
 		range(min, max) {
@@ -40,7 +49,7 @@
 			const el = document.createElement(type);
 
 			el.className = className;
-			if (typeof html !== undefined) {
+			if (typeof html !== 'undefined') {
 				el.innerHTML = html;
 			}
 			parent.appendChild(el);
@@ -51,10 +60,9 @@
 		year(className) {
 			const timeline = new TimelineMax(),
 				newYearEl = countdown.element(
-					this.els.newYearContainer,
+					this.els.newYear.container,
 					'div',
-					className,
-					''
+					className
 				),
 				newYearVal = countdown.period.year.toString(10);
 
@@ -62,7 +70,7 @@
 				const digitEl = countdown.element(
 					newYearEl,
 					'span',
-					this.els.newYearDigit,
+					this.els.newYear.digit,
 					digitVal
 				);
 
@@ -72,8 +80,9 @@
 		},
 
 		init() {
-			countdown.year(this.els.newYearMain);
-			countdown.year(this.els.newYearReflection);
+			console.log(this.els);
+			countdown.year(this.els.newYear.main);
+			countdown.year(this.els.newYear.reflection);
 		}
 	};
 	countdown.init();
