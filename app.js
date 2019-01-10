@@ -1,19 +1,17 @@
 (function() {
 	const countdown = {
-		els: {
-			newYear: {
-				container: document.querySelector('.countdown__year'),
-				main: 'countdown__year-main',
-				reflection: 'countdown__year-reflection',
-				digit: 'countdown__year-digit'
-			},
-			timer: {
-				container: 'countdown__timer',
-				days: 'countdown__timer-days',
-				hours: 'countdown__timer-hours',
-				minutes: 'countdown__timer-minutes',
-				seconds: 'countdown__timer-seconds'
-			}
+		newYear: {
+			container: document.querySelector('.countdown__year'),
+			main: 'countdown__year-main',
+			reflection: 'countdown__year-reflection',
+			digit: 'countdown__year-digit'
+		},
+		timer: {
+			container: 'countdown__timer',
+			days: 'countdown__timer-days',
+			hours: 'countdown__timer-hours',
+			minutes: 'countdown__timer-minutes',
+			seconds: 'countdown__timer-seconds'
 		},
 
 		range(min, max) {
@@ -59,18 +57,14 @@
 
 		year(className) {
 			const timeline = new TimelineMax(),
-				newYearEl = countdown.element(
-					this.els.newYear.container,
-					'div',
-					className
-				),
+				newYearEl = countdown.element(this.newYear.container, 'div', className),
 				newYearVal = countdown.period.year.toString(10);
 
 			newYearVal.split('').forEach(digitVal => {
 				const digitEl = countdown.element(
 					newYearEl,
 					'span',
-					this.els.newYear.digit,
+					this.newYear.digit,
 					digitVal
 				);
 
@@ -81,8 +75,8 @@
 
 		init() {
 			console.log(this.els);
-			countdown.year(this.els.newYear.main);
-			countdown.year(this.els.newYear.reflection);
+			countdown.year(this.newYear.main);
+			countdown.year(this.newYear.reflection);
 		}
 	};
 	countdown.init();
