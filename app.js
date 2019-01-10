@@ -43,7 +43,7 @@
 			};
 		},
 
-		element(parent, type, className, html) {
+		createElement(parent, type, className, html) {
 			const el = document.createElement(type);
 
 			el.className = className;
@@ -55,13 +55,17 @@
 			return el;
 		},
 
-		year(className) {
+		addYear(className) {
 			const timeline = new TimelineMax(),
-				newYearEl = this.element(this.newYear.container, 'div', className),
+				newYearEl = this.createElement(
+					this.newYear.container,
+					'div',
+					className
+				),
 				newYearVal = this.period.year.toString(10);
 
 			newYearVal.split('').forEach(digitVal => {
-				const digitEl = this.element(
+				const digitEl = this.createElement(
 					newYearEl,
 					'span',
 					this.newYear.digit,
@@ -74,8 +78,8 @@
 		},
 
 		init() {
-			this.year(this.newYear.main);
-			this.year(this.newYear.reflection);
+			this.addYear(this.newYear.main);
+			this.addYear(this.newYear.reflection);
 		}
 	};
 	countdown.init();
