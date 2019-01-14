@@ -1,11 +1,12 @@
 (function() {
 	const countdown = {
-		newYear: {
+		year: {
 			container: 'countdown__year',
-			main: 'countdown__year-main',
+			new: 'countdown__year-new',
 			reflection: 'countdown__year-reflection',
 			digit: 'countdown__year-digit'
 		},
+
 		timer: {
 			container: 'countdown__timer',
 			days: 'countdown__timer-days',
@@ -63,14 +64,14 @@
 
 		createYear(className) {
 			const timeline = new TimelineMax(),
-				newYearEl = this.addElement(this.newYear.container, 'div', className),
-				newYearVal = this.period.year.toString(10);
+				yearEl = this.addElement(this.year.container, 'div', className),
+				yearVal = this.period.year.toString(10);
 
-			newYearVal.split('').forEach(digitVal => {
+			yearVal.split('').forEach(digitVal => {
 				const digitEl = this.addElement(
-					newYearEl,
+					yearEl,
 					'span',
-					this.newYear.digit,
+					this.year.digit,
 					digitVal
 				);
 
@@ -78,11 +79,11 @@
 				timeline.to(digitEl, 0.5, { top: 0, opacity: 1, ease: Bounce.easeOut });
 			});
 
-			return newYearEl;
+			return yearEl;
 		},
 
 		createTimer(objName) {
-			this.addElement(this.newYear.container, 'div', objName.container);
+			this.addElement(this.year.container, 'div', objName.container);
 			this.timer.daysEl = this.addElement(
 				this.timer.container,
 				'div',
@@ -125,8 +126,8 @@
 		},
 
 		init() {
-			this.newYear.mainEl = this.createYear(this.newYear.main);
-			this.newYear.reflectionEl = this.createYear(this.newYear.reflection);
+			this.year.newEl = this.createYear(this.year.new);
+			this.year.reflectionEl = this.createYear(this.year.reflection);
 			this.createTimer(this.timer);
 		}
 	};
