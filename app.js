@@ -48,6 +48,7 @@
 
 			el.className = className;
 			if (typeof html !== 'undefined') {
+				// FIXME: Change innerHTML to textContent
 				el.innerHTML = html;
 			}
 
@@ -102,6 +103,25 @@
 				'div',
 				objName.seconds
 			);
+
+			this.updateTimer();
+		},
+
+		updateTimer() {
+			const period = this.period,
+				timer = this.timer;
+
+			function addLabel(number, segment) {
+				let num = number <= 9 ? '0' + number : '' + number;
+				let label = num + ' ' + segment;
+
+				return number === 1 ? label : label + 's';
+			}
+
+			timer.secondsEl.textContent = addLabel(period.seconds, 'second');
+			timer.minutesEl.textContent = addLabel(period.minutes, 'minute');
+			timer.hoursEl.textContent = addLabel(period.hours, 'hour');
+			timer.daysEl.textContent = addLabel(period.days, 'day');
 		},
 
 		init() {

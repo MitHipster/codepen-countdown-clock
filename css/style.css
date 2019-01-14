@@ -36,5 +36,17 @@ body {
   position: relative;
   opacity: 0;
 }
+.countdown__timer {
+  display: flex;
+  font-size: 0.8rem;
+  margin-top: 30px;
+}
+.countdown__timer > div {
+  padding: 0 20px;
+  border-left: 1px solid #333;
+}
+.countdown__timer > div:first-child {
+  border-left: none;
+}
 
 /*# sourceMappingURL=style.css.map */

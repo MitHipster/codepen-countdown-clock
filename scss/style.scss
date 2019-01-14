@@ -39,4 +39,19 @@ body {
 			opacity: 0;
 		}
 	}
+
+	&__timer {
+		display: flex;
+		font-size: 0.8rem;
+		margin-top: 30px;
+
+		> div {
+			padding: 0 20px;
+			border-left: 1px solid #333;
+
+			&:first-child {
+				border-left: none;
+			}
+		}
+	}
 }
