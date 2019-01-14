@@ -1,7 +1,7 @@
 (function() {
 	const countdown = {
 		newYear: {
-			container: document.querySelector('.countdown__year'),
+			container: 'countdown__year',
 			main: 'countdown__year-main',
 			reflection: 'countdown__year-reflection',
 			digit: 'countdown__year-digit'
@@ -43,29 +43,30 @@
 			};
 		},
 
-		createElement(parent, type, className, html) {
+		addElement(parent, type, className, html) {
 			const el = document.createElement(type);
 
 			el.className = className;
 			if (typeof html !== 'undefined') {
 				el.innerHTML = html;
 			}
-			parent.appendChild(el);
+
+			const parentEl =
+				typeof parent !== 'string'
+					? parent
+					: document.getElementsByClassName(parent)[0];
+			parentEl.appendChild(el);
 
 			return el;
 		},
 
-		addYear(className) {
+		createYear(className) {
 			const timeline = new TimelineMax(),
-				newYearEl = this.createElement(
-					this.newYear.container,
-					'div',
-					className
-				),
+				newYearEl = this.addElement(this.newYear.container, 'div', className),
 				newYearVal = this.period.year.toString(10);
 
 			newYearVal.split('').forEach(digitVal => {
-				const digitEl = this.createElement(
+				const digitEl = this.addElement(
 					newYearEl,
 					'span',
 					this.newYear.digit,
@@ -75,12 +76,40 @@
 				digitEl.style.top = 0 - digitEl.clientHeight * 2 + 'px';
 				timeline.to(digitEl, 0.5, { top: 0, opacity: 1, ease: Bounce.easeOut });
 			});
+
+			return newYearEl;
+		},
+
+		createTimer(objName) {
+			this.addElement(this.newYear.container, 'div', objName.container);
+			this.timer.daysEl = this.addElement(
+				this.timer.container,
+				'div',
+				objName.days
+			);
+			this.timer.hoursEl = this.addElement(
+				this.timer.container,
+				'div',
+				objName.hours
+			);
+			this.timer.minutesEl = this.addElement(
+				this.timer.container,
+				'div',
+				objName.minutes
+			);
+			this.timer.secondsEl = this.addElement(
+				this.timer.container,
+				'div',
+				objName.seconds
+			);
 		},
 
 		init() {
-			this.addYear(this.newYear.main);
-			this.addYear(this.newYear.reflection);
+			this.newYear.mainEl = this.createYear(this.newYear.main);
+			this.newYear.reflectionEl = this.createYear(this.newYear.reflection);
+			this.createTimer(this.timer);
 		}
 	};
 	countdown.init();
+	console.log(countdown);
 })();
