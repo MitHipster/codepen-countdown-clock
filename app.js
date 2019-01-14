@@ -15,6 +15,8 @@
 			seconds: 'countdown__timer-seconds'
 		},
 
+		elements: {},
+
 		range(min, max) {
 			return Math.floor(Math.random() * (max - min + 1) + min);
 		},
@@ -82,52 +84,49 @@
 			return yearEl;
 		},
 
-		createTimer(objName) {
-			this.addElement(this.year.container, 'div', objName.container);
-			this.timer.daysEl = this.addElement(
-				this.timer.container,
-				'div',
-				objName.days
-			);
-			this.timer.hoursEl = this.addElement(
-				this.timer.container,
-				'div',
-				objName.hours
-			);
-			this.timer.minutesEl = this.addElement(
-				this.timer.container,
-				'div',
-				objName.minutes
-			);
-			this.timer.secondsEl = this.addElement(
-				this.timer.container,
-				'div',
-				objName.seconds
-			);
+		createTimer(timer) {
+			for (const segment in timer) {
+				if (timer.hasOwnProperty(segment)) {
+					if (segment === 'container') {
+						this.elements[segment] = this.addElement(
+							this.year.container,
+							'div',
+							timer[segment]
+						);
+					} else {
+						this.elements[segment] = this.addElement(
+							this.timer.container,
+							'div',
+							timer[segment]
+						);
+					}
+				}
+			}
 
 			this.updateTimer();
 		},
 
 		updateTimer() {
 			const period = this.period,
-				timer = this.timer;
+				timer = this.elements;
 
 			function addLabel(number, segment) {
-				let num = number <= 9 ? '0' + number : '' + number;
-				let label = num + ' ' + segment;
+				let value = number <= 9 ? '0' + number : '' + number;
+				let label = value + ' ' + segment;
 
 				return number === 1 ? label : label + 's';
 			}
 
-			timer.secondsEl.textContent = addLabel(period.seconds, 'second');
-			timer.minutesEl.textContent = addLabel(period.minutes, 'minute');
-			timer.hoursEl.textContent = addLabel(period.hours, 'hour');
-			timer.daysEl.textContent = addLabel(period.days, 'day');
+			// Add / change content from most frequently updated to least
+			timer.seconds.textContent = addLabel(period.seconds, 'second');
+			timer.minutes.textContent = addLabel(period.minutes, 'minute');
+			timer.hours.textContent = addLabel(period.hours, 'hour');
+			timer.days.textContent = addLabel(period.days, 'day');
 		},
 
 		init() {
-			this.year.newEl = this.createYear(this.year.new);
-			this.year.reflectionEl = this.createYear(this.year.reflection);
+			this.elements.year = this.createYear(this.year.new);
+			this.elements.reflection = this.createYear(this.year.reflection);
 			this.createTimer(this.timer);
 		}
 	};
