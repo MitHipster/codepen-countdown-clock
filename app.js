@@ -85,6 +85,9 @@
 		},
 
 		createTimer(timer) {
+			const delayIncrement = 0.5;
+			let counter = 0;
+
 			for (const segment in timer) {
 				if (timer.hasOwnProperty(segment)) {
 					if (segment === 'container') {
@@ -94,11 +97,21 @@
 							timer[segment]
 						);
 					} else {
+						const timeline = new TimelineMax();
 						this.elements[segment] = this.addElement(
 							this.timer.container,
 							'div',
 							timer[segment]
 						);
+
+						timeline.to(
+							this.elements[segment],
+							0.5,
+							{ top: 0, opacity: 1 },
+							delayIncrement * counter
+						);
+						console.log(delayIncrement * counter);
+						counter++;
 					}
 				}
 			}

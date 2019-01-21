@@ -44,6 +44,9 @@ body {
 .countdown__timer > div {
   padding: 0 20px;
   border-left: 1px solid #333;
+  position: relative;
+  opacity: 0;
+  top: 100px;
 }
 .countdown__timer > div:first-child {
   border-left: none;
