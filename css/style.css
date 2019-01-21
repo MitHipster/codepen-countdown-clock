@@ -23,9 +23,13 @@ body {
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  min-width: 600px;
   justify-content: center;
   align-items: center;
   font-size: 6rem;
+}
+.countdown__year-new {
+  position: relative;
 }
 .countdown__year-reflection {
   transform: rotateX(180deg);
@@ -50,6 +54,23 @@ body {
 }
 .countdown__timer > div:first-child {
   border-left: none;
+}
+.countdown__confetti {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.countdown__confetti-shapes {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #333;
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

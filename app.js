@@ -15,6 +15,11 @@
 			seconds: 'countdown__timer-seconds'
 		},
 
+		confetti: {
+			container: 'countdown__confetti',
+			shapes: 'countdown__confetti-shapes'
+		},
+
 		elements: {},
 
 		range(min, max) {
@@ -135,12 +140,69 @@
 			timer.days.textContent = addLabel(period.days, 'day');
 		},
 
+		createConfetti(className) {
+			const fullTimeline = new TimelineMax(),
+				confettiContainer = this.addElement(this.year.new, 'div', className),
+				confettiShapes = [];
+			let confettiContainerWidth = 0;
+
+			for (let i = 1; i <= 50; i++) {
+				const time = this.range(0, 100) / 100,
+					duration = 0.5,
+					direction = this.range(1, 2) === 1 ? -1 : 1,
+					timeline = new TimelineMax({ repeat: -1 }),
+					confettiShape = this.addElement(
+						confettiContainer,
+						'div',
+						this.confetti.shapes
+					);
+
+				confettiShape.style.top = '-50px';
+				timeline
+					.set(confettiShape, { scale: this.range(10, 20) / 10 }, time)
+					.to(confettiShape, duration, { opacity: 1 }, time)
+					.to(
+						confettiShape,
+						duration * 2,
+						{
+							top: '200%',
+							rotationZ: this.range(180, 360) * direction,
+							rotationX: this.range(180, 360) * direction
+						},
+						time
+					)
+					.to(confettiShape, duration, { opacity: 0 }, time + duration);
+
+				fullTimeline.add(timeline, 0);
+				confettiShapes.push(confettiShape);
+			}
+
+			function checkWidth() {
+				let newWidth = this.elements.year.clientWidth;
+
+				if (Math.abs(confettiContainerWidth - newWidth) > 1) {
+					for (let i = 0; i < confettiShapes.length; i++) {
+						confettiShapes[i].style.left = -5 + this.range(0, newWidth) + 'px';
+					}
+					confettiContainerWidth = newWidth;
+				}
+			}
+
+			// Delay function call to get final width of container
+			setTimeout(checkWidth.bind(this), 250);
+
+			return new TimelineMax()
+				.set(confettiContainer, { opacity: 1 }, 3)
+				.add(fullTimeline, 3);
+		},
+
 		init() {
 			this.elements.year = this.createYear(this.year.new);
 			this.elements.reflection = this.createYear(this.year.reflection);
 			this.interval = this.createTimer(this.timer);
+			this.createConfetti(this.confetti.container);
 		}
 	};
+
 	countdown.init();
-	console.log(countdown);
 })();
