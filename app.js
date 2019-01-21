@@ -46,13 +46,12 @@
 			};
 		},
 
-		addElement(parent, type, className, html) {
+		addElement(parent, type, className, text) {
 			const el = document.createElement(type);
 
 			el.className = className;
-			if (typeof html !== 'undefined') {
-				// FIXME: Change innerHTML to textContent
-				el.innerHTML = html;
+			if (typeof text !== 'undefined') {
+				el.textContent = text;
 			}
 
 			const parentEl =
@@ -119,7 +118,6 @@
 		},
 
 		updateTimer() {
-			console.log(this);
 			const period = this.period,
 				timer = this.elements;
 
