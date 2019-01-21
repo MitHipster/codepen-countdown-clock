@@ -85,7 +85,7 @@
 		},
 
 		createTimer(timer) {
-			const delayIncrement = 0.5;
+			const duration = 0.5;
 			let counter = 0;
 
 			for (const segment in timer) {
@@ -106,20 +106,20 @@
 
 						timeline.to(
 							this.elements[segment],
-							0.5,
+							duration,
 							{ top: 0, opacity: 1 },
-							delayIncrement * counter
+							duration * counter
 						);
-						console.log(delayIncrement * counter);
 						counter++;
 					}
 				}
 			}
 
-			this.updateTimer();
+			return setInterval(this.updateTimer.bind(this), 250);
 		},
 
 		updateTimer() {
+			console.log(this);
 			const period = this.period,
 				timer = this.elements;
 
@@ -140,7 +140,7 @@
 		init() {
 			this.elements.year = this.createYear(this.year.new);
 			this.elements.reflection = this.createYear(this.year.reflection);
-			this.createTimer(this.timer);
+			this.interval = this.createTimer(this.timer);
 		}
 	};
 	countdown.init();
